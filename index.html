@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KeyStroke Pro | typing institute</title>
+    <!-- Font Awesome 6 (free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+        }
+
+        :root {
+            --primary: #2a3b4c;
+            --accent: #f0b541;
+            --light: #f8f9fa;
+            --dark: #1e2b36;
+            --text: #333;
+            --white: #ffffff;
+            --shadow: 0 8px 20px rgba(0,0,0,0.05);
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* HEADER & NAVIGATION */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary);
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--primary);
+            font-weight: 500;
+            transition: color 0.2s;
+            font-size: 1.05rem;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent);
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 4px;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.6rem;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* HERO SECTION */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #1f3a4b 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h2 {
+            font-size: 2.8rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .hero h2 strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-btn {
+            background-color: var(--accent);
+            color: var(--primary);
+            border: none;
+            padding: 0.8rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 12px rgba(240, 181, 65, 0.3);
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(240, 181, 65, 0.5);
+        }
+
+        /* MAIN CONTAINER */
+        .container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-title h3 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h3:after {
+            content: '';
+            display: block;
+            width: 70%;
+            height: 3px;
+            background: var(--accent);
+            margin: 0.5rem auto 0;
+        }
+
+        /* FEATURES / CARDS */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 2rem 1.5rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            transition: all 0.25s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            font-size: 2.8rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h4 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+
+        /* COURSES */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .course-item {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 1.8rem;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--accent);
+        }
+
+        .course-item h4 {
+            font-size: 1.6rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .course-level {
+            display: inline-block;
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: 600;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            margin: 0.5rem 0 1rem;
+        }
+
+        .course-desc {
+            margin-bottom: 1.2rem;
+        }
+
+        .course-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .course-price small {
+            font-size: 0.9rem;
+            font-weight: 400;
+            color: #666;
+        }
+
+        /* TYPING SPEED TEST (interactive) */
+        .speedtest-panel {
+            background: var(--white);
+            border-radius: 24px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .test-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .timer-box, .wpm-box {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1.2rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1.3rem;
+        }
+
+        .timer-box span, .wpm-box span {
+            color: var(--accent);
+            font-size: 1.8rem;
+            margin-left: 0.4rem;
+        }
+
+        .sentence-display {
+            background: #eef2f5;
+            padding: 1.5rem;
+            border-radius: 24px;
+            font-size: 1.4rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+            border: 2px dashed var(--primary);
+            color: var(--dark);
+            font-weight: 500;
+            text-align: center;
+        }
+
+        #userInput {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.2rem;
+            border: 2px solid #ccc;
+            border-radius: 40px;
+            outline: none;
+            transition: 0.2s;
+            margin-bottom: 1.2rem;
+        }
+
+        #userInput:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(240,181,65,0.2);
+        }
+
+        .test-controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .test-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.7rem 1.8rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .test-btn:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        .test-btn.reset-btn {
+            background: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .test-btn.reset-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .result-area {
+            margin-top: 1.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-align: center;
+        }
+
+        /* CONTACT / INFO */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            background: var(--white);
+            border-radius: 28px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .contact-details p {
+            margin: 1rem 0;
+            font-size: 1.15rem;
+        }
+
+        .contact-details i {
+            color: var(--accent);
+            width: 2rem;
+            font-size: 1.3rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.9rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .contact-form button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.9rem 2rem;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .contact-form button:hover {
+            background: var(--accent);
+            color: var(--primary);
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: var(--primary);
+            color: #ddd;
+            text-align: center;
+            padding: 2rem;
+            font-size: 1rem;
+            margin-top: 2rem;
+        }
+
+        footer .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+                padding: 1.5rem 0;
+            }
+
+            .nav-links.show {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .test-header {
+                justify-content: center;
+                gap: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>Pragya<span>Institute</span></h1>
+            </div>
+            <div class="menu-toggle" id="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#courses">Courses</a></li>
+                <li><a href="#speedtest">Speed test</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO / HOME -->
+        <section id="home">
+            <div class="hero">
+                <div class="hero-content">
+                    <h2>Type with <strong>confidence & speed</strong></h2>
+                    <p>India's most trusted typing institute — 10+ years, 5000+ successful students.</p>
+                    <button class="cta-btn" onclick="document.getElementById('courses').scrollIntoView({behavior:'smooth'})">Explore courses</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FEATURES / WHY US -->
+        <div class="container">
+            <div class="section-title">
+                <h3>why keystroke pro</h3>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-keyboard"></i></div>
+                    <h4>Expert trainers</h4>
+                    <p>Certified instructors with 15+ years experience in shorthand & typing.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-chart-line"></i></div>
+                    <h4>10+ speed levels</h4>
+                    <p>From 25 WPM to 80+ WPM. tailored batches for beginners & pros.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                    <h4>Flexible timing</h4>
+                    <p>Morning, evening & weekend batches. also online live sessions.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon"><i class="fas fa-certificate"></i></div>
+                    <h4>Govt. certified</h4>
+                    <p>Recognized certificate after course completion & assessment.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- COURSES section -->
+        <div class="container" id="courses">
+            <div class="section-title">
+                <h3>our courses</h3>
+            </div>
+            <div class="courses-grid">
+                <div class="course-item">
+                    <h4>Touch typing basics</h4>
+                    <span class="course-level">Beginner</span>
+                    <p class="course-desc">Learn finger positioning, accuracy drills & reach 30 WPM.</p>
+                    <div class="course-price">₹2,499 <small>6 weeks</small></div>
+                </div>
+                <div class="course-item">
+                    <h4>Speed Booster</h4>
+                    <span class="course-level">Intermediate</span>
+                    <p class="course-desc">Target 50-60 WPM. with shorthand techniques & practice sets.</p>
+                    <div class="course-price">₹3,999 <small>8 weeks</small></div>
+                </div>
+                <div class="course-item">
+                    <h4>Master class (80+ WPM)</h4>
+                    <span class="course-level">Advanced</span>
+                    <p class="course-desc">For govt. exam aspirants. special focus on accuracy & speed mocks.</p>
+                    <div class="course-price">₹5,499 <small>10 weeks</small></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TYPING SPEED TEST (interactive JS) -->
+        <div class="container" id="speedtest">
+            <div class="section-title">
+                <h3>free typing speed test</h3>
+            </div>
+            <div class="speedtest-panel">
+                <div class="test-header">
+                    <div class="timer-box"><i class="far fa-clock"></i> <span id="timer">60</span>s</div>
+                    <div class="wpm-box"><i class="fas fa-tachometer-alt"></i> <span id="wpmDisplay">0</span> WPM</div>
+                </div>
+
+                <div class="sentence-display" id="sentence">
+                    The quick brown fox jumps over the lazy dog near the river.
+                </div>
+
+                <textarea id="userInput" placeholder="Start typing here..." rows="2"></textarea>
+
+                <div class="test-controls">
+                    <button class="test-btn" id="startTestBtn"><i class="fas fa-play"></i> Start</button>
+                    <button class="test-btn reset-btn" id="resetTestBtn"><i class="fas fa-redo-alt"></i> Reset</button>
+                </div>
+
+                <div class="result-area" id="resultMsg"></div>
+                <p style="font-size:0.9rem; margin-top:0.8rem; color:#555;"><i class="fas fa-info-circle"></i> 60s timer, type the sentence above.</p>
+            </div>
+        </div>
+
+        <!-- CONTACT section -->
+        <div class="container" id="contact">
+            <div class="section-title">
+                <h3>get in touch</h3>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-details">
+                    <p><i class="fas fa-map-marker-alt"></i> 45, Typing hub, Bata Road, Sahibganj – 816109</p>
+                    <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+                    <p><i class="fas fa-envelope"></i> admissions@PragyaInstitute.in</p>
+                    <p><i class="fas fa-clock"></i> Mon-Sat: 8:00 am – 8:00 pm</p>
+                    <div style="margin-top:2rem;">
+                        <a href="https://www.facebook.com/groups/621076326058020/?ref=share&mibextid=NSMWBT" target="_blank">
+                            <i class="fab fa-facebook fa-2x" style="color:var(--primary); margin-right:1rem;"></i>
+                        </a>
+                        <a href="https://www.instagram.com/binayaksooryawanshi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank">
+                            <i class="fab fa-instagram fa-2x" style="color:var(--primary); margin-right:1rem;"></i>
+                        </a>
+                        <a href="https://share.google/UBZjooL5SA0RZSAnU" target="_blank">
+                            <i class="fab fa-google fa-2x" style="color:var(--primary);"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="quickContact">
+                        <input type="text" placeholder="Your name" required>
+                        <input type="email" placeholder="Email address" required>
+                        <textarea rows="3" placeholder="I'm interested in ..."></textarea>
+                        <button type="submit">Send message <i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <p style="margin-top:1rem; font-size:0.9rem;" id="formFeedback"></p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 Pragya Commercial Typing Institute. All rights reserved. | <i class="fas fa-heart" style="color:var(--accent);"></i> accuracy matters</p>
+        </div>
+    </footer>
+
+    
+    <script>
+        (function() {
+            
+            const menuToggle = document.getElementById('mobile-menu');
+            const navLinks = document.getElementById('navLinks');
+
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('show');
+                });
+            }
+
+           
+            const sections = document.querySelectorAll('section, .container[id]');
+            const navItems = document.querySelectorAll('.nav-links a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.offsetHeight;
+                    if (pageYOffset >= sectionTop && pageYOffset < sectionTop + sectionHeight) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navItems.forEach(item => {
+                    item.classList.remove('active');
+                    if (item.getAttribute('href') === `#${current}`) {
+                        item.classList.add('active');
+                    }
+                });
+            });
+
+           
+            const sentenceEl = document.getElementById('sentence');
+            const userInput = document.getElementById('userInput');
+            const timerSpan = document.getElementById('timer');
+            const wpmSpan = document.getElementById('wpmDisplay');
+            const resultMsg = document.getElementById('resultMsg');
+            const startBtn = document.getElementById('startTestBtn');
+            const resetBtn = document.getElementById('resetTestBtn');
+
+            
+            const sentences = [
+                "The quick brown fox jumps over the lazy dog near the river.",
+                "Typing speed improves with daily practice and proper finger placement.",
+                "Learning touch typing can double your productivity on any computer.",
+                "KeyStroke Pro offers the best typing courses in India with live trainers.",
+                "Accuracy is more important than speed, especially for beginners."
+            ];
+
+            let timerInterval = null;
+            let timeLeft = 60;
+            let testActive = false;
+            let originalSentence = sentences[0];
+
+            
+            function calculateWPM(typed, original, seconds) {
+                if (seconds <= 0 || typed.length === 0) return 0;
+                const typedWords = typed.trim().split(/\s+/).filter(w => w !== '').length;
+                
+                const minutes = seconds / 60;
+                return Math.round(typedWords / minutes);
+            }
+
+            function updateWPM() {
+                if (!testActive) return;
+                const typed = userInput.value;
+                const timeElapsed = 60 - timeLeft;
+                const wpm = calculateWPM(typed, originalSentence, timeElapsed);
+                wpmSpan.innerText = wpm;
+            }
+
+            function startTest() {
+                if (testActive) return; 
+
+                if (timeLeft <= 0) {
+                    resetTest();
+                }
+
+                testActive = true;
+                userInput.disabled = false;
+                userInput.focus();
+                resultMsg.innerText = '';
+
+                if (timerInterval) clearInterval(timerInterval);
+
+                timerInterval = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        timerSpan.innerText = timeLeft;
+                        updateWPM();
+                    }
+
+                    if (timeLeft <= 0) {
+                        
+                        clearInterval(timerInterval);
+                        timerInterval = null;
+                        testActive = false;
+                        userInput.disabled = true;
+
+                        const finalWPM = wpmSpan.innerText;
+                        const accuracy = calculateAccuracy(userInput.value, originalSentence);
+                        resultMsg.innerHTML = `✅ Test finished! Speed: <strong>${finalWPM} WPM</strong> &nbsp; Accuracy: ${accuracy}%`;
+                    }
+                }, 1000);
+            }
+
+            
+            function calculateAccuracy(typed, original) {
+                if (typed.length === 0) return 0;
+                let correct = 0;
+                const len = Math.min(typed.length, original.length);
+                for (let i = 0; i < len; i++) {
+                    if (typed[i] === original[i]) correct++;
+                }
+                const total = Math.max(typed.length, original.length);
+                return ((correct / total) * 100).toFixed(1);
+            }
+
+            function resetTest() {
+                
+                if (timerInterval) {
+                    clearInterval(timerInterval);
+                    timerInterval = null;
+                }
+
+                testActive = false;
+                timeLeft = 60;
+                timerSpan.innerText = timeLeft;
+                wpmSpan.innerText = '0';
+                
+                const randomIdx = Math.floor(Math.random() * sentences.length);
+                originalSentence = sentences[randomIdx];
+                sentenceEl.innerText = originalSentence;
+                userInput.value = '';
+                userInput.disabled = false; 
+                resultMsg.innerText = 'Test reset. Press Start to begin.';
+            }
+
+            
+            resetTest();
+
+            
+            startBtn.addEventListener('click', startTest);
+
+            resetBtn.addEventListener('click', () => {
+                resetTest();
+            });
+
+           
+            userInput.addEventListener('input', () => {
+                if (testActive) {
+                    updateWPM();
+                }
+            });
+
+           
+            userInput.disabled = false;
+            function setInputState() {
+                userInput.disabled = !testActive;
+            }
+            
+            const originalReset = resetTest;
+            resetTest = function() {
+                if (timerInterval) clearInterval(timerInterval);
+                testActive = false;
+                timeLeft = 60;
+                timerSpan.innerText = timeLeft;
+                wpmSpan.innerText = '0';
+                const randomIdx = Math.floor(Math.random() * sentences.length);
+                originalSentence = sentences[randomIdx];
+                sentenceEl.innerText = originalSentence;
+                userInput.value = '';
+                userInput.disabled = false;  
+                userInput.disabled = true;    
+                resultMsg.innerText = 'Click "Start" to begin the test.';
+            };
+
+            
+            const originalStart = startTest;
+            startTest = function() {
+                if (testActive) return;
+                if (timeLeft <= 0) {
+                 
+                    resetTest();
+                }
+                testActive = true;
+                userInput.disabled = false;
+                userInput.focus();
+                resultMsg.innerText = '';
+
+                if (timerInterval) clearInterval(timerInterval);
+                timerInterval = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        timerSpan.innerText = timeLeft;
+                        updateWPM();
+                    }
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        timerInterval = null;
+                        testActive = false;
+                        userInput.disabled = true;
+                        const finalWPM = wpmSpan.innerText;
+                        const accuracy = calculateAccuracy(userInput.value, originalSentence);
+                        resultMsg.innerHTML = `✅ Test finished! Speed: <strong>${finalWPM} WPM</strong> &nbsp; Accuracy: ${accuracy}%`;
+                    }
+                }, 1000);
+            };
+
+            
+            window.startTest = startTest;
+            window.resetTest = resetTest;
+
+           
+            startBtn.onclick = startTest;
+            resetBtn.onclick = () => { resetTest(); };
+
+            
+            resetTest();
+
+           
+            const contactForm = document.getElementById('quickContact');
+            const formFeedback = document.getElementById('formFeedback');
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                formFeedback.innerHTML = '<span style="color:green;">✔ Thank you! We will contact you soon.</span>';
+                contactForm.reset();
+            });
+
+        })();
+    </script>
+   
+    <script>
+        (function secondary() {
+            const links = document.querySelectorAll('.nav-links a');
+            const mobileMenu = document.getElementById('navLinks');
+            links.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileMenu.classList.contains('show')) {
+                        mobileMenu.classList.remove('show');
+                    }
+                });
+            });
+        })();
+    </script>
+</body>
+</html>
